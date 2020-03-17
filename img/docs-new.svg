@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path stroke="#a39ffc" id="svg_1" fill="#6c63ff" d="m441.411987,140.235001l0,338.781021c0,18.218994 -14.777985,32.983002 -32.983002,32.983002l-304.856987,0c-18.219002,0 -32.983002,-14.764008 -32.983002,-32.983002l0,-446.03302c-0.000999,-18.219002 14.763,-32.983002 32.983002,-32.983002l197.605003,0l140.234985,140.235001z"/>
+  <g id="svg_2">
+   <rect id="svg_3" fill="#FFFFFF" height="21.071" width="189.626" y="257.054" x="161.18"/>
+   <rect id="svg_4" fill="#FFFFFF" height="21.071" width="189.626" y="304.112" x="161.18"/>
+   <rect id="svg_5" fill="#FFFFFF" height="21.071" width="189.626" y="351.171" x="161.18"/>
+   <rect id="svg_6" fill="#FFFFFF" height="21.071" width="134.855" y="398.23" x="161.18"/>
+  </g>
+  <polygon id="svg_7" fill="#4a46a3" points="320.31,137.188 441.412,187.079 441.412,140.235 372.751,119.962 "/>
+  <path id="svg_8" fill="#a39ffc" d="m441.411987,140.235001l-107.251984,0c-18.220001,0 -32.983002,-14.764 -32.983002,-32.983002l0,-107.251999l140.234985,140.235001z"/>
+  <g id="svg_9"/>
+  <g id="svg_10"/>
+  <g id="svg_11"/>
+  <g id="svg_12"/>
+  <g id="svg_13"/>
+  <g id="svg_14"/>
+  <g id="svg_15"/>
+  <g id="svg_16"/>
+  <g id="svg_17"/>
+  <g id="svg_18"/>
+  <g id="svg_19"/>
+  <g id="svg_20"/>
+  <g id="svg_21"/>
+  <g id="svg_22"/>
+  <g id="svg_23"/>
+ </g>
+</svg>
