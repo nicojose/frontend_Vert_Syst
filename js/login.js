@@ -30,15 +30,38 @@ function removeColor(){
 	}
 }
 
+//login Method: Post
 loginForm.addEventListener('submit', function(e){
 	e.preventDefault();
 
-	console.log(e);
-	console.log('form sent');
-});
+	const usrName = document.getElementById('input-username').value;
+	const pwd = document.getElementById('input-password').value;
+	console.log("usr:" + usrName + " pwd: " + pwd);
 
-log_in.addEventListener('click', () => {
-	location.href = "main-page.html";
+	fetch('http://demo0789151.mockable.io/nicojose', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			username: usrName,
+			password: pwd
+		})
+	})
+	.then(res => {
+		if(!res.ok){
+			throw Error();
+		}
+		return res.json();
+	})
+	.then(json => {
+		console.log(json);
+		console.log(json.id_token);
+		localStorage.setItem('ID-Token', json.id_token);
+	})
+	.catch(error => {
+		alert('Anmeldung Fehlgeschlagen. Bitte veruch es erneut!');
+	});
 });
 
 window.addEventListener("load", function(event) {
