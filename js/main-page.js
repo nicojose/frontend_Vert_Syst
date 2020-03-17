@@ -2,30 +2,55 @@ const search = document.getElementById('searchbar');
 const matchlist = document.getElementById('match-list');
 const abmelden = document.getElementById('log-out');
 
-
+  // Method POST
   async function searchStates(searchText){
+    console.log('before fetch get items of user');
+    fetch('http://demo0789151.mockable.io/nicojose/post', {
+  		method: 'POST',
+  		headers: {
+  			'Content-Type': 'application/json'
+  		},
+  		body: JSON.stringify({
+  			id_token: localStorage.getItem('ID_Token')
+  		})
+  	})
+    .then(res => {
+      console.log('fetch got items of user');
+      console.log(res);
+      console.log(res.json);
+      if(!res.ok){
+        throw Error();
+      }
+      console.log('fetch was ok and got items of user');
+      console.log('response');
+      return res.json();
+    })
+    .then(json => {
+      console.log('json');
+      const list = json;
 
-    const response = await fetch('http://demo1229719.mockable.io/nicojose');
-    const list = await response.json();
-    console.log(list);
+      //filter die liste der einträgen nach input
+      let matches = list.filter(item => {
+        const regex = new RegExp(`^${searchText}`, 'gi');
+        return item.titel.match(regex) || item.datum.match(regex);
+      });
 
-    //filter die liste der einträgen nach input
-    let matches = list.filter(item => {
-      const regex = new RegExp(`^${searchText}`, 'gi');
-      return item.titel.match(regex) || item.datum.match(regex);
+      console.log(matches);
+      if(searchText == ''){
+        matches = list;
+        matchlist.innerHTML = "";
+      }
+
+      if(matches.length > 0){
+        const html = outputMatches2HTML(matches);
+      } else {
+        matchlist.innerHTML = "";
+      }
+
+    }).catch(error => {
+      console.log(error);
+      alert('Fehler beim Laden der Einträge. Bitte versuche es später erneut!');
     });
-
-    console.log(matches);
-    if(searchText == ''){
-      matches = list;
-      matchlist.innerHTML = "";
-    }
-
-    if(matches.length > 0){
-      const html = outputMatches2HTML(matches);
-    } else {
-      matchlist.innerHTML = "";
-    }
   }
 
   function outputMatches2HTML(matches){
@@ -46,18 +71,36 @@ const abmelden = document.getElementById('log-out');
     }
   }
 
-
-/*<ul class="col-md-auto">
-  <li><a href="#"><i class="far fa-trash-alt fa-lg delete" id="delete-${match.id} onClick="delete_element_clicked()"></i></a></li>
-</ul>*/
-
-  //printe alle elemente der liste unter searchbar
-  async function initialOutputOfList(){
-    const response = await fetch('http://demo1229719.mockable.io/nicojose');
-    const list = await response.json();
-    console.log(list);
-
-    outputMatches2HTML(list);
+  //printe alle elemente der liste unter searchbar => Method POST
+  function initialOutputOfList(){
+    fetch('http://demo0789151.mockable.io/nicojose/post', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id_token: localStorage.getItem('ID_Token')
+      })
+    })
+    .then(res => {
+      console.log('fetch got items of user');
+      console.log(res);
+      console.log(res.json);
+      if(!res.ok){
+        throw Error();
+      }
+      console.log('fetch was ok and got items of user');
+      console.log('response');
+      return res.json();
+    })
+    .then(json => {
+      console.log('json');
+      const list = json;
+      outputMatches2HTML(list);
+    }).catch(error => {
+      console.log(error);
+      alert('Fehler beim Laden der Einträge. Bitte versuche es später erneut!');
+    });
   }
 
   //scripting
@@ -67,8 +110,7 @@ const abmelden = document.getElementById('log-out');
 
 
   document.getElementById('add').addEventListener("click", function(){
-    console.log('add');
-
+    location.href = 'editor.html';
   });
 
   document.getElementById('log-out').addEventListener("click", function(){
@@ -79,6 +121,9 @@ const abmelden = document.getElementById('log-out');
 
   function search_element_clicked (id){
     console.log('element ' + id);
+
+    localStorage.setItem('notiz-id', id);
+    location.href = 'editor.html';
   }
 
   function delete_element_clicked (id){

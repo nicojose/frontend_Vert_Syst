@@ -43,16 +43,12 @@ header li, a, button, i {
   background-color: #333;
 }
 
-.nav_links li a{
-  background-color: #333;
-}
-
-.nav_links li a i{
+.nav_links li i{
   transition: all 0.3s ease 0s;
   background-color: #333;
 }
 
-.nav_links li a i:hover {
+.nav_links li i:hover {
   color: #6C63FF;
 }
 
