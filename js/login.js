@@ -58,7 +58,7 @@ loginForm.addEventListener('submit', function(e){
 		console.log(json);
 		console.log(json.id_token);
 		localStorage.setItem('ID-Token', json.id_token);
-		location.href = 'main-page';
+		location.href = 'main-page.html';
 	})
 	.catch(error => {
 		alert('Anmeldung Fehlgeschlagen. Bitte veruch es erneut!');
