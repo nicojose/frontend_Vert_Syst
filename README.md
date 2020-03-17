@@ -2,8 +2,8 @@
 
 ## Loginscreen
 
-### login on button click
-Method: POST
+### Login on button click
+Method: POST\
 Details:    
     {
 		method: 'POST',
@@ -13,9 +13,9 @@ Details:
 		body: JSON.stringify({
 			username: usrName,
 			password: pwd
-		}
-Wants Statuscode: 200 ok
-Needs Response: Type:Json, Body:
+		}\
+Wants Statuscode: 200 ok\
+Needs Response: Type:Json, Body:\
     {
      "id_token": "12345882820872378897238934287hjkadfpnoiuhuibphpifephnoi"
     }
