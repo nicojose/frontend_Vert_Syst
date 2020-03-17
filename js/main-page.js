@@ -73,6 +73,7 @@ const abmelden = document.getElementById('log-out');
 
   document.getElementById('log-out').addEventListener("click", function(){
     console.log('abmelden');
+    localStorage.clear();
     location.href = "login.html";
   });
 

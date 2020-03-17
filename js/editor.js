@@ -60,6 +60,7 @@ document.getElementById('delete').addEventListener("click", function(){
 
 document.getElementById('log-out').addEventListener("click", function(){
   console.log('abmelden');
+  localStorage.clear();
   location.href = "login.html";
 });
 
