@@ -40,3 +40,8 @@ loginForm.addEventListener('submit', function(e){
 log_in.addEventListener('click', () => {
 	location.href = "main-page.html";
 });
+
+window.addEventListener("load", function(event) {
+	 console.log("Alle Ressourcen haben das Laden beendet!");
+	 localStorage.clear();
+ });
