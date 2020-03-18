@@ -1,4 +1,4 @@
-# frontend_Vert_Syst
+# frontend_Vert_Syst Requests
 
 ## Loginscreen
 
@@ -17,22 +17,19 @@ Details:
 Wants Statuscode: 200 ok\
 Needs Response: Type:Json, Body:\
     {
-     "id_token": "12345882820872378897238934287hjkadfpnoiuhuibphpifephnoi"
+     "user_token": "12345882820872378897238934287hjkadfpnoiuhuibphpifephnoi"
     }
     
 ## Main-Page
 
 ### Get resources of user -> sending userID Token to Backend
-Method: POST\
+Method: GET\
 Details:\
 {
-		method: 'POST',
+		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			username: usrName,
-			password: pwd
+			'user_token': `${localStorage.getItem('user_token')}`
 		}\
 Wants Statuscode: 200 ok\
 Needs Response:\
@@ -52,8 +49,22 @@ Needs Response:\
 ]
 
 ### delete resource
-Method: DELETE
-not implementet yet
+Method: DELETE\
+Details:\
+{
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user_token: localStorage.getItem('user_token'),
+        eintrag_id: id
+      })
+    }\
+Wants Statuscode: 200 ok\
+Needs Response: no\
+[
+]
 
 ## Editor-Page
 
