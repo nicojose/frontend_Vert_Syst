@@ -2,17 +2,15 @@ const search = document.getElementById('searchbar');
 const matchlist = document.getElementById('match-list');
 const abmelden = document.getElementById('log-out');
 
-  // Method POST
+  // gets notiz-einträge Method GET
   async function searchStates(searchText){
     console.log('before fetch get items of user');
-    fetch('http://demo0789151.mockable.io/nicojose/post', {
-  		method: 'POST',
+    fetch('https://jsonplaceholder.typicode.com/posts/1', {
+  		method: 'GET',
   		headers: {
-  			'Content-Type': 'application/json'
-  		},
-  		body: JSON.stringify({
-  			id_token: localStorage.getItem('ID_Token')
-  		})
+  			'Content-Type': 'application/json',
+        'user_token': `${localStorage.getItem('user_token')}`
+  		}
   	})
     .then(res => {
       console.log('fetch got items of user');
@@ -49,7 +47,7 @@ const abmelden = document.getElementById('log-out');
 
     }).catch(error => {
       console.log(error);
-      alert('Fehler beim Laden der Einträge. Bitte versuche es später erneut!');
+      //alert('Fehler beim Laden der Einträge. Bitte versuche es später erneut!');
     });
   }
 
@@ -71,16 +69,14 @@ const abmelden = document.getElementById('log-out');
     }
   }
 
-  //printe alle elemente der liste unter searchbar => Method POST
+  //printe alle elemente der liste unter searchbar => Method GET
   function initialOutputOfList(){
-    fetch('http://demo0789151.mockable.io/nicojose/post', {
-      method: 'POST',
+    fetch('https://jsonplaceholder.typicode.com/posts/1', {
+      method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        id_token: localStorage.getItem('ID_Token')
-      })
+        'Content-Type': 'application/json',
+        'user_token': `${localStorage.getItem('user_token')}`
+      }
     })
     .then(res => {
       console.log('fetch got items of user');
@@ -99,7 +95,7 @@ const abmelden = document.getElementById('log-out');
       outputMatches2HTML(list);
     }).catch(error => {
       console.log(error);
-      alert('Fehler beim Laden der Einträge. Bitte versuche es später erneut!');
+      //alert('Fehler beim Laden der Einträge. Bitte versuche es später erneut!');
     });
   }
 
@@ -126,10 +122,29 @@ const abmelden = document.getElementById('log-out');
     location.href = 'editor.html';
   }
 
+  //delete notiz-element Method: DELETE
   function delete_element_clicked (id){
     console.log('delete ' + id);
 
-    searchStates(search.value); //list aktualisieren
+    fetch('http://demo0789151.mockable.io/nicojose/delete', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user_token: localStorage.getItem('user_token'),
+        eintrag_id: id
+      })
+    })
+    .then(res => {
+      if(!res.ok){
+        throw Error();
+      }
+      searchStates(search.value); //list aktualisieren
+    })
+    .catch(err => {
+      alert('Löschen fehlgeschlagen');
+    })
   }
 
   window.onload = function() {

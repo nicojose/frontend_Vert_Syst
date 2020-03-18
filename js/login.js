@@ -56,8 +56,8 @@ loginForm.addEventListener('submit', function(e){
 	})
 	.then(json => {
 		console.log(json);
-		console.log(json.id_token);
-		localStorage.setItem('ID-Token', json.id_token);
+		console.log(json.user_token);
+		localStorage.setItem('user_token', json.user_token);
 		location.href = 'main-page.html';
 	})
 	.catch(error => {
