@@ -28,7 +28,7 @@ Details:\
 {
 		method: 'GET',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 			'user_token': `${localStorage.getItem('user_token')}`
 		}\
 Wants Statuscode: 200 ok\
