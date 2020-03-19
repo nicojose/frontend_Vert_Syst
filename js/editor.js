@@ -40,6 +40,50 @@ function save(){
   const delta_string = JSON.stringify(delta);
   const delta_string_b64 = btoa(delta_string); //convert uniconde to base64
   console.log('body: ' + delta_string_b64);
+
+  if(localStorage.getItem('newItem') == 'true'){
+    console.log('post');
+    fetch('http://localhost:3000/comments', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'user_token': `${localStorage.getItem('user_token')}`
+      },
+      body: JSON.stringify({
+        'id': 'automatisch vom server zu erzeugen',
+        'titel': `${title}`,
+        'datum': `${date}`,
+        'inhalt': `${delta_string_b64}`
+      })
+    })
+    .then(res => {
+      console.log(res);
+      if(!res.ok){
+        throw Error();
+      }
+    }).then(json => {
+      console.log(json);
+    })
+    .catch(err => {
+      console.log('error beim post');
+    });
+  } else {
+    console.log('put');
+
+    fetch('http://localhost:3000/comments', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'user_token': `${localStorage.getItem('user_token')}`
+      },
+      body: JSON.stringify({
+        'id': 'automatisch vom server zu erzeugen',
+        'titel': `${title}`,
+        'datum': `${date}`,
+        'inhalt': `${delta_string_b64}`
+      })
+    })
+  }
 }
 
 document.getElementById('logo').addEventListener("click", function(){

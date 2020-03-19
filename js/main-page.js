@@ -81,7 +81,6 @@ const abmelden = document.getElementById('log-out');
     .then(res => {
       console.log('fetch got items of user');
       console.log(res);
-      console.log(res.json);
       if(!res.ok){
         throw Error();
       }
@@ -90,7 +89,7 @@ const abmelden = document.getElementById('log-out');
       return res.json();
     })
     .then(json => {
-      console.log('json');
+      console.log(json);
       const list = json;
       outputMatches2HTML(list);
     }).catch(error => {
@@ -119,7 +118,7 @@ const abmelden = document.getElementById('log-out');
     console.log('element ' + id);
     localStorage.setItem('newItem', 'false');
 
-    localStorage.setItem('notiz-id', id);
+    localStorage.setItem('notiz_id', id);
     location.href = 'editor.html';
   }
 
@@ -127,17 +126,16 @@ const abmelden = document.getElementById('log-out');
   function delete_element_clicked (id){
     console.log('delete ' + id);
 
-    fetch('http://demo0789151.mockable.io/nicojose/delete', {
+    fetch('http://localhost:3000/posts', {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        user_token: localStorage.getItem('user_token'),
-        eintrag_id: id
-      })
+        'Content-Type': 'application/json',
+        'user_token': `${localStorage.getItem('user_token')}`,
+        'eintrag_id': `${id}`
+      }
     })
     .then(res => {
+      console.log(res);
       if(!res.ok){
         throw Error();
       }

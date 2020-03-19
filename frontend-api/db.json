@@ -1,26 +1,33 @@
 {
   "posts": [
     {
-      "titel": "Einkaufsliste",
-      "datum": "01.01.2020",
-      "inhalt": "jkskhjfaijosjasljkfjkds8390ölhj4rjkl4309oihjdfgu90okjlfdnlöew09fdjkl98dfgousrjq34jl4309re80üfgd98340qiouj"
-    },
-    {
+      "id": "2",
       "titel": "Shopping",
       "datum": "05.03.2020",
       "inhalt": "jkskhjfaijosjasljkfjkds8390ölhj4rjkl4309oihjdfgu90okjlfdnlöew09fdjkl98dfgousrjq34jl4309re80üfgd98340qiouj"
     },
     {
+      "id": "24",
       "titel": "Tagebuch",
+      "datum": "01.03.2020",
+      "inhalt": "jkskhjfaijosjasljkfjkds8390ölhj4rjkl4309oihjdfgu90okjlfdnlöew09fdjkl98dfgousrjq34jl4309re80üfgd98340qiouj"
+    },
+    {
+      "id": "25",
+      "titel": "minime",
       "datum": "01.03.2020",
       "inhalt": "jkskhjfaijosjasljkfjkds8390ölhj4rjkl4309oihjdfgu90okjlfdnlöew09fdjkl98dfgousrjq34jl4309re80üfgd98340qiouj"
     }
   ],
   "comments": [
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": "asdf"
+    },
+    {
+      "id": "automatisch vom server zu erzeugen",
+      "titel": "Ohne Titel",
+      "datum": "19.2.2020",
+      "inhalt": "eyJvcHMiOlt7Imluc2VydCI6IlxuIn1dfQ=="
     }
   ],
   "profile": {
