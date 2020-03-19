@@ -38,15 +38,13 @@ loginForm.addEventListener('submit', function(e){
 	const pwd = document.getElementById('input-password').value;
 	console.log("usr:" + usrName + " pwd: " + pwd);
 
-	fetch('http://demo0789151.mockable.io/nicojose', {
-		method: 'POST',
+	fetch('http://localhost:3000/profile', {
+		method: 'GET',
 		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			username: usrName,
-			password: pwd
-		})
+			'Content-Type': 'application/json',
+			'username': `${usrName}`,
+			'password': `${pwd}`
+		}
 	})
 	.then(res => {
 		if(!res.ok){
@@ -69,5 +67,5 @@ window.addEventListener("load", function(event) {
 	 console.log("Alle Ressourcen haben das Laden beendet!");
 	 localStorage.clear();
 	 //TODO delete after testing
-	 localStorage.setItem('user_token', 'jsdafklfdsaiöhjk8u89p7fsdakhjöeru8ühjkfds');
+	 //localStorage.setItem('user_token', 'jsdafklfdsaiöhjk8u89p7fsdakhjöeru8ühjkfds');
  });
