@@ -1,5 +1,5 @@
 const inputs = document.querySelectorAll(".input");
-const loginForm = document.getElementById("login-form");
+const loginForm = document.getElementById("wrapper");
 const log_in = document.getElementById('log-in');
 
 inputs.forEach(input => {
