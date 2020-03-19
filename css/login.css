@@ -157,7 +157,11 @@ form{
 	transition: .3s;
 }
 
-a:hover{
+#forgot-Password:hover{
+	color: #6C63FF;
+}
+
+#register:hover{
 	color: #6C63FF;
 }
 

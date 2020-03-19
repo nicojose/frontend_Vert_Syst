@@ -1,6 +1,5 @@
 const inputs = document.querySelectorAll(".input");
-const loginForm = document.getElementById("wrapper");
-const log_in = document.getElementById('log-in');
+const loginForm = document.getElementById("login-form");
 
 inputs.forEach(input => {
 	input.addEventListener("focus", addColor);
