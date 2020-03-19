@@ -117,6 +117,7 @@ const abmelden = document.getElementById('log-out');
 
   function search_element_clicked (id){
     console.log('element ' + id);
+    localStorage.setItem('newItem', 'false');
 
     localStorage.setItem('notiz-id', id);
     location.href = 'editor.html';
@@ -149,4 +150,5 @@ const abmelden = document.getElementById('log-out');
 
   window.onload = function() {
     console.log('page loaded');
+    localStorage.setItem('newItem', 'true');
   };

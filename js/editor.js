@@ -52,6 +52,7 @@ document.getElementById('logo').addEventListener("click", function(){
 
 document.getElementById('save').addEventListener("click", function(){
   save();
+  localStorage.setItem('newItem', 'false');
 });
 
 document.getElementById('delete').addEventListener("click", function(){
