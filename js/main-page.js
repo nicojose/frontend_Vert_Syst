@@ -5,7 +5,7 @@ const abmelden = document.getElementById('log-out');
   // gets notiz-einträge Method GET
   async function searchStates(searchText){
     console.log('before fetch get items of user');
-    fetch('https://jsonplaceholder.typicode.com/posts/1', {
+    fetch('http://localhost:3000/posts', {
   		method: 'GET',
   		headers: {
   			'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ const abmelden = document.getElementById('log-out');
 
   //printe alle elemente der liste unter searchbar => Method GET
   function initialOutputOfList(){
-    fetch('https://jsonplaceholder.typicode.com/posts/1', {
+    fetch('http://localhost:3000/posts', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

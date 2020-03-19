@@ -68,4 +68,6 @@ loginForm.addEventListener('submit', function(e){
 window.addEventListener("load", function(event) {
 	 console.log("Alle Ressourcen haben das Laden beendet!");
 	 localStorage.clear();
+	 //TODO delete after testing
+	 localStorage.setItem('user_token', 'jsdafklfdsaiöhjk8u89p7fsdakhjöeru8ühjkfds');
  });
