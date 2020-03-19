@@ -3,17 +3,16 @@
 ## Loginscreen
 
 ### Login on button click
-Method: POST\
+Method: GET\
 Details:    
     {
-		method: 'POST',
+		method: 'GET',
 		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			username: usrName,
-			password: pwd
-		}\
+			'Content-Type': 'application/json',
+			'username': `${usrName}`,
+			'password': `${pwd}`
+		}
+	}\
 Wants Statuscode: 200 ok\
 Needs Response: Type:Json, Body:\
     {
