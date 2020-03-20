@@ -1,6 +1,6 @@
 const inputs = document.querySelectorAll(".input");
 const loginForm = document.getElementById("login-form");
-const register = document.getElementById("register");
+const register = document.getElementById("send_pwd");
 
 inputs.forEach(input => {
 	input.addEventListener("focus", addColor);
@@ -26,20 +26,12 @@ register.addEventListener('click', e => {
   console.log("submit");
 
   const username = document.getElementById('input-username').value;
-  const pwd1 = document.getElementById('input-password').value;
-  const pwd2 = document.getElementById('input-password-wdh').value;
   const email = document.getElementById('input-email').value;
-	console.log(pwd1 + " " + pwd2);
+
 	console.log(email);
 	console.log((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)));
 
-    if(pwd1 == ""){
-      alert('Passwort darf nicht lehr sein!');
-    } else if (pwd1 != pwd2) {
-      alert('Passwöter stimmen nicht überein!');
-    } else if (pwd1.length < 8){
-      alert('Passwort muss mindestens 8 Zeichen lang sein!');
-    } else if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) == false) {
+    if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) == false) {
       alert('Email-Adressen müssen dem Format email@domain.etwas entsprechen')
     } else {
       //im Backend
@@ -53,7 +45,6 @@ register.addEventListener('click', e => {
         },
         body: JSON.stringify({
 					username: username,
-					password: pwd1,
 					email: email
         })
       })
@@ -66,7 +57,7 @@ register.addEventListener('click', e => {
         }
       })
       .catch(err => {
-        alert('Registrierung fehlgeschlagen');
+        alert('Passwort zurücksetzen fehlgeschlagen');
       });
     }
 });

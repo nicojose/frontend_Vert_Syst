@@ -50,7 +50,6 @@ function save(){
         'user_token': `${localStorage.getItem('user_token')}`
       },
       body: JSON.stringify({
-        'id': 'automatisch vom server zu erzeugen',
         'titel': `${title}`,
         'datum': `${date}`,
         'inhalt': `${delta_string_b64}`
@@ -77,7 +76,6 @@ function save(){
         'user_token': `${localStorage.getItem('user_token')}`
       },
       body: JSON.stringify({
-        'id': 'automatisch vom server zu erzeugen',
         'titel': `${title}`,
         'datum': `${date}`,
         'inhalt': `${delta_string_b64}`
