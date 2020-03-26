@@ -38,6 +38,7 @@ function save(){
 
   const delta = quill.getContents();
   const delta_string = JSON.stringify(delta);
+  console.log(delta_string);
   const delta_string_b64 = btoa(delta_string); //convert uniconde to base64
   console.log('body: ' + delta_string_b64);
 
@@ -107,6 +108,49 @@ document.getElementById('log-out').addEventListener("click", function(){
   location.href = "login.html";
 });
 
+async function fillEditor(){
+  await fetch("http://localhost:8080/test123", {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json',
+      'user_token': `${localStorage.getItem('user_token')}`,
+      'element_id': `${localStorage.getItem('element_id')}`
+    }
+  })
+  .then(res => {
+    console.log(res);
+    if(!res.ok){
+        throw Error();
+    }
+    return res.json();
+  })
+  .then(json => {
+    var titel = json.titel;
+    console.log(titel);
+    var inhalt_b64 = json.inhalt;
+    console.log(inhalt_b64);
+
+    console.log('inhalt: ' + inhalt_b64);
+    var delta_string_unicode = atob(inhalt_b64); //convert uniconde to base64
+    console.log(delta_string_unicode);
+    delta_string_unicode = delta_string_unicode + '\n'; //add linebreak
+    console.log(delta_string_unicode);
+
+    //set Title and content
+    document.getElementById('title').value = titel;
+    quill.setContents(JSON.parse(delta_string_unicode));
+  })
+  .catch(err => {
+    console.log(err);
+    alert("Laden Fehlgeschlagen");
+  });
+}
+
 window.onload = function() {
   console.log('page loaded');
+
+  if(localStorage.getItem('newItem') == 'false'){
+    console.log("fetch hier");
+    fillEditor();
+  }
 };

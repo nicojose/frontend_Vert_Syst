@@ -116,6 +116,7 @@ const abmelden = document.getElementById('log-out');
 
   function search_element_clicked (id){
     console.log('element ' + id);
+    localStorage.setItem('element_id', id);
     localStorage.setItem('newItem', 'false');
 
     localStorage.setItem('notiz_id', id);
