@@ -207,5 +207,26 @@ Wants Statuscode: 200 ok\
 Needs Response: no\
 [
 ]
+
+### Eintragsdaten fetchen von vorhandnem Element
+Method: GET\
+Request:\
+  await fetch("http://localhost:8080/test123", {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json',
+      'user_token': `${localStorage.getItem('user_token')}`,
+      'element_id': `${localStorage.getItem('element_id')}`
+    }
+  })
+Wants Statuscode: 200 ok\
+Needs Response: yes\
+[
+{
+    "datum": "10.12.2019",
+    "titel": "Mein Tagebuch",
+    "inhalt": "eyJvcHMiOlt7ImF0dHJpYnV0ZXMiOnsiYm9sZCI6dHJ1ZX0sImluc2VydCI6ImFzZGZhc2RmIn0seyJhdHRyaWJ1dGVzIjp7InVuZGVybGluZSI6dHJ1ZSwiaXRhbGljIjp0cnVlLCJib2xkIjp0cnVlfSwiaW5zZXJ0IjoiZGRkZGQifSx7Imluc2VydCI6IlxuIn1dfQ=="
+}
+]
  
   
