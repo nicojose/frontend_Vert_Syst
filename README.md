@@ -37,29 +37,18 @@ Needs Response: Type:Json, Body:\
     }
   
  ## Forgot Password
- Method: 'POST'\
+ Method: 'GET'\
  Request:\
-   fetch('http://localhost:3000/comments', {
-        method: 'POST',
+    fetch('http://localhost:8080/test', {
+        method: 'GET',
         headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-		username: username,	
-		email: email
-        })
-      })
-      .then(res => {
-        console.log(res);
-        if(!res.ok){
-          throw Error();
-        } else {
-          location.href = 'login.html';
+          'Content-Type': 'application/json',
+					'username': `${username}`,
+					'email': `${email}`
         }
-      })
-      .catch(err => {
-        alert('Passwort zurücksetzen fehlgeschlagen');
-      });\
+      })\
+ Response:\
+ {"password": "start123"}\
  Needs Response: hauptsache 200 ok
  
 ## Registrieren
