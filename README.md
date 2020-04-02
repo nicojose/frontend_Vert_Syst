@@ -1,6 +1,16 @@
 # frontend_Vert_Syst Requests
 Wichtig! Die Response Jsons müssen genau gleich sein, die Reihenfolge ist nicht so wichtig, aber die Variablen müssen genauso heißen!!!
 
+
+## Dockerisierung des Frontends
+### Dockerfile
+FROM nginx\
+COPY frontend_Vert_Syst /usr/share/nginx/html
+### Image bauen
+docker build -t website-vert-syst .
+### Container laufen lassen
+docker run --name website -d -p 3000:80 website-vert-syst:latest
+
 ## Loginscreen
 
 ### Login on button click
