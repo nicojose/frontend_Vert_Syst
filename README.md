@@ -16,18 +16,20 @@ docker run --name website -d -p 3000:80 website-vert-syst:latest
 ### Login on button click
 Method: GET\
 Request:\
-	const params = new URLSearchParams({
-		'username': `${usrName}`,
-		'password': `${pwd}`
-	});
-	const url = `http://localhost:8080/users/login?${params.toString()}`;
+```
+const params = new URLSearchParams({
+	'username': `${usrName}`,
+	'password': `${pwd}`
+});
+const url = `http://localhost:8080/users/login?${params.toString()}`;
 
-	fetch(url, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	});\
+fetch(url, {
+	method: 'GET',
+	headers: {
+		'Content-Type': 'application/json'
+	}
+});
+```
 Wants Statuscode: 200 ok, sonst fliegt fehler\
 Needs Response: Type:Json, Body:\
     {
