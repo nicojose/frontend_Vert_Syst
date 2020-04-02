@@ -16,30 +16,18 @@ docker run --name website -d -p 3000:80 website-vert-syst:latest
 ### Login on button click
 Method: GET\
 Request:\
-fetch('http://localhost:3000/profile', {
+const params = new URLSearchParams({
+		'username': `${usrName}`,
+		'password': `${pwd}`
+	});
+	const url = `http://localhost:8080/users/login?${params.toString()}`;
+
+	fetch(url, {
 		method: 'GET',
 		headers: {
-			'Content-Type': 'application/json',
-			'username': `${usrName}`,
-			'password': `${pwd}`
+			'Content-Type': 'application/json'
 		}
-	})
-	.then(res => {
-		if(!res.ok){
-			throw Error();
-		}
-		return res.json();
-	})
-	.then(json => {
-		console.log(json);
-		console.log(json.user_token);
-		localStorage.setItem('user_token', json.user_token);
-		location.href = 'main-page.html';
-	})
-	.catch(error => {
-		alert('Anmeldung Fehlgeschlagen. Bitte veruch es erneut!');
-	});
-});\
+	});\
 Wants Statuscode: 200 ok, sonst fliegt fehler\
 Needs Response: Type:Json, Body:\
     {
@@ -49,12 +37,15 @@ Needs Response: Type:Json, Body:\
  ## Forgot Password
  Method: 'GET'\
  Request:\
-    fetch('http://localhost:8080/test', {
+const params = new URLSearchParams({
+				username: `${username}`,
+				email: `${email}`
+		  });
+		  const url = `http://localhost:8080/users/password?${params.toString()}`;
+      fetch(url, {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
-					'username': `${username}`,
-					'email': `${email}`
+          'Content-Type': 'application/json'
         }
       })\
  Response:\
@@ -64,28 +55,18 @@ Needs Response: Type:Json, Body:\
 ## Registrieren
 Method: POST\
 Request:\
-fetch('http://localhost:3000/comments', {
+const url = `http://localhost:8080/users`;
+      fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-		username: username,
-		password: pwd1,
-		email: email
+					username: username,
+					password: pwd1,
+					email: email
         })
-      })
-      .then(res => {
-        console.log(res);
-        if(!res.ok){
-          throw Error();
-        } else {
-          location.href = 'login.html';
-        }
-      })
-      .catch(err => {
-        alert('Registrierung fehlgeschlagen');
-      });\
+      })\
 
  Needs Response: hauptsache 200 ok
 
@@ -94,24 +75,14 @@ fetch('http://localhost:3000/comments', {
 ### Get resources of user -> sending userID Token to Backend
 Method: GET\
 Request:\
-    fetch('http://localhost:3000/posts', {
+const url = `http://localhost:8080/documents`;
+    fetch(url, {
   		method: 'GET',
   		headers: {
   			'Content-Type': 'application/json',
         'user_token': `${localStorage.getItem('user_token')}`
   		}
-  	})
-    .then(res => {
-      console.log('fetch got items of user');
-      console.log(res);
-      console.log(res.json);
-      if(!res.ok){
-        throw Error();
-      }
-      console.log('fetch was ok and got items of user');
-      console.log('response');
-      return res.json();
-    })\
+  	})\
 
 Info: Die GET Methode hat keinen Body. Infos werden über den Header mitgegeben. In dem Fall der user token. Wird 2 mal ausgeführt, aber mit anderen Hintergrundoperationen im Frontend. Der Request bleibt jedoch unverändert.\
 Wants Statuscode: 200 ok\
@@ -135,25 +106,18 @@ Wichtig: die Attribute müssen gleich heißen, sonst klappt das Mapping im Front
 ### delete resource
 Method: DELETE\
 Request:\
-fetch('http://localhost:3000/posts', {
+  const params = new URLSearchParams({
+      'eintrag_id': `${id}`
+    });
+    const url = `http://localhost:8080/documents?${params.toString()}`;
+
+    fetch(url, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'user_token': `${localStorage.getItem('user_token')}`,
-        'eintrag_id': `${id}`
+        'user_token': `${localStorage.getItem('user_token')}`
       }
-    })
-    .then(res => {
-      console.log(res);
-      if(!res.ok){
-        throw Error();
-      }
-      searchStates(search.value); //list aktualisieren
-    })
-    .catch(err => {
-      alert('Löschen fehlgeschlagen');
-    })
-  }\
+    })\
 Wants Statuscode: 200 ok\
 Needs Response: no\
 [
@@ -164,7 +128,8 @@ Needs Response: no\
 ### Neuen Eintrag speichern
 Method: 'POST'
 Request:\
-    fetch('http://localhost:3000/comments', {
+    const url = `http://localhost:8080/documents`;
+    fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -175,12 +140,6 @@ Request:\
         'datum': `${date}`,
         'inhalt': `${delta_string_b64}`
       })
-    })
-    .then(res => {
-      console.log(res);
-      if(!res.ok){
-        throw Error();
-      }
     })\
 Wants Statuscode: 200 ok\
 Needs Response: no\
@@ -190,7 +149,12 @@ Needs Response: no\
 ### Vorhandenen Eintrag speichern
 Method: PUT\
 Request:\
-fetch('http://localhost:3000/comments', {
+const params = new URLSearchParams({
+  		element_id: localStorage.getItem('element_id', id)
+  	});
+    const url = `http://localhost:3000/documents?${params.toString()}`;
+
+    fetch(url, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -210,14 +174,17 @@ Needs Response: no\
 ### Eintragsdaten fetchen von vorhandnem Element
 Method: GET\
 Request:\
-  await fetch("http://localhost:8080/test123", {
+  const params = new URLSearchParams({
+    element_id: `${localStorage.getItem('element_id')}`
+  });
+  const url = `http://localhost:8080/documents?${params.toString()}`;
+  await fetch(url, {
     method: "GET",
     headers: {
       'Content-Type': 'application/json',
-      'user_token': `${localStorage.getItem('user_token')}`,
-      'element_id': `${localStorage.getItem('element_id')}`
+      'user_token': `${localStorage.getItem('user_token')}`
     }
-  })
+  })\
 Wants Statuscode: 200 ok\
 Needs Response: yes\
 [
