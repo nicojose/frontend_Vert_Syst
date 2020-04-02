@@ -32,44 +32,52 @@ fetch(url, {
 ```
 Wants Statuscode: 200 ok, sonst fliegt fehler\
 Needs Response: Type:Json, Body:\
+```
     {
      "user_token": "12345882820872378897238934287hjkadfpnoiuhuibphpifephnoi"
     }
-
- ## Forgot Password
+```
+## Forgot Password
  Method: 'GET'\
  Request:\
+```
 const params = new URLSearchParams({
-				username: `${username}`,
-				email: `${email}`
-		  });
-		  const url = `http://localhost:8080/users/password?${params.toString()}`;
-      fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
+	username: `${username}`,
+	email: `${email}`
+  });
+const url = `http://localhost:8080/users/password?${params.toString()}`;
+fetch(url, {
+	method: 'GET',
+	headers: {
+		'Content-Type': 'application/json'
         }
-      })\
+})
+```
  Response:\
- {"password": "start123"}\
+ ```
+ {
+ "password": "start123"
+ }
+ ```
  Needs Response: hauptsache 200 ok
 
 ## Registrieren
 Method: POST\
 Request:\
+```
 const url = `http://localhost:8080/users`;
-      fetch(url, {
+	fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-					username: username,
-					password: pwd1,
-					email: email
+		username: username,
+		password: pwd1,
+		email: email
         })
       })\
-
+```
  Needs Response: hauptsache 200 ok
 
 ## Main-Page
