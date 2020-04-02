@@ -85,6 +85,7 @@ const url = `http://localhost:8080/users`;
 ### Get resources of user -> sending userID Token to Backend
 Method: GET\
 Request:\
+```
 const url = `http://localhost:8080/documents`;
     fetch(url, {
   		method: 'GET',
@@ -92,11 +93,13 @@ const url = `http://localhost:8080/documents`;
   			'Content-Type': 'application/json',
         'user_token': `${localStorage.getItem('user_token')}`
   		}
-  	})\
+  	})
+```
 
 Info: Die GET Methode hat keinen Body. Infos werden über den Header mitgegeben. In dem Fall der user token. Wird 2 mal ausgeführt, aber mit anderen Hintergrundoperationen im Frontend. Der Request bleibt jedoch unverändert.\
 Wants Statuscode: 200 ok\
 Needs Response: Beispiel:\
+```
 [
   {
     "id" : "1",
@@ -110,24 +113,27 @@ Needs Response: Beispiel:\
     "datum" : "05.03.2020",
     "inhalt" : "jkskhjfaijosjasljkfjkds8390ölhj4rjkl4309oihjdfgu90okjlfdnlöew09fdjkl98dfgousrjq34jl4309re80üfgd98340qiouj"
   }, ...
-]\
+]
+```
 Wichtig: die Attribute müssen gleich heißen, sonst klappt das Mapping im Frontend nicht
 
 ### delete resource
 Method: DELETE\
-Request:\
-  const params = new URLSearchParams({
-      'eintrag_id': `${id}`
+Request:
+```
+const params = new URLSearchParams({
+    'eintrag_id': `${id}`
     });
-    const url = `http://localhost:8080/documents?${params.toString()}`;
+const url = `http://localhost:8080/documents?${params.toString()}`;
 
-    fetch(url, {
+fetch(url, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         'user_token': `${localStorage.getItem('user_token')}`
       }
-    })\
+})
+```
 Wants Statuscode: 200 ok\
 Needs Response: no\
 [
@@ -137,7 +143,8 @@ Needs Response: no\
 
 ### Neuen Eintrag speichern
 Method: 'POST'
-Request:\
+Request:
+```
     const url = `http://localhost:8080/documents`;
     fetch(url, {
       method: 'POST',
@@ -150,7 +157,8 @@ Request:\
         'datum': `${date}`,
         'inhalt': `${delta_string_b64}`
       })
-    })\
+    })
+```
 Wants Statuscode: 200 ok\
 Needs Response: no\
 [
@@ -158,7 +166,8 @@ Needs Response: no\
 
 ### Vorhandenen Eintrag speichern
 Method: PUT\
-Request:\
+Request:
+```
 const params = new URLSearchParams({
   		element_id: localStorage.getItem('element_id', id)
   	});
@@ -175,7 +184,8 @@ const params = new URLSearchParams({
         'datum': `${date}`,
         'inhalt': `${delta_string_b64}`
       })
-    })\
+    })
+```
 Wants Statuscode: 200 ok\
 Needs Response: no\
 [
@@ -183,7 +193,8 @@ Needs Response: no\
 
 ### Eintragsdaten fetchen von vorhandnem Element
 Method: GET\
-Request:\
+Request:
+```
   const params = new URLSearchParams({
     element_id: `${localStorage.getItem('element_id')}`
   });
@@ -194,13 +205,16 @@ Request:\
       'Content-Type': 'application/json',
       'user_token': `${localStorage.getItem('user_token')}`
     }
-  })\
+  })
+```  
 Wants Statuscode: 200 ok\
 Needs Response: yes\
+```
 [
 {
     "datum": "10.12.2019",
     "titel": "Mein Tagebuch",
-    "inhalt": "eyJvcHMiOlt7ImF0dHJpYnV0ZXMiOnsiYm9sZCI6dHJ1ZX0sImluc2VydCI6ImFzZGZhc2RmIn0seyJhdHRyaWJ1dGVzIjp7InVuZGVybGluZSI6dHJ1ZSwiaXRhbGljIjp0cnVlLCJib2xkIjp0cnVlfSwiaW5zZXJ0IjoiZGRkZGQifSx7Imluc2VydCI6IlxuIn1dfQ=="
+    "inhalt": 	"eyJvcHMiOlt7ImF0dHJpYnV0ZXMiOnsiYm9sZCI6dHJ1ZX0sImluc2VydCI6ImFzZGZhc2RmIn0seyJhdHRyaWJ1dGVzIjp7InVuZGVybGluZSI6dHJ1ZSwiaXRhbGljIjp0cnVlLCJib2xkIjp0cnVlfSwiaW5zZXJ0IjoiZGRkZGQifSx7Imluc2VydCI6IlxuIn1dfQ=="
 }
 ]
+```
