@@ -16,7 +16,7 @@ docker run --name website -d -p 3000:80 website-vert-syst:latest
 ### Login on button click
 Method: GET\
 Request:\
-const params = new URLSearchParams({
+	const params = new URLSearchParams({
 		'username': `${usrName}`,
 		'password': `${pwd}`
 	});
