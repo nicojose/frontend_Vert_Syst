@@ -38,25 +38,31 @@ register.addEventListener('click', e => {
       //get alle usernames
       //schau ob der username schon vorhanden ist
       // wenn nein alert('Nutzername ist schon vergeben');
-      fetch('http://localhost:3000/comments', {
-        method: 'POST',
+      fetch('http://localhost:8080/test', {
+        method: 'GET',
         headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-					username: username,
-					email: email
-        })
+          'Content-Type': 'application/json',
+					'username': `${username}`,
+					'email': `${email}`
+        }
       })
       .then(res => {
         console.log(res);
         if(!res.ok){
           throw Error();
-        } else {
-          location.href = 'login.html';
         }
+				return res.json();
       })
+			.then(json => {
+				console.log(json);
+				const pwd = json.password;
+				const pwd_text = `Dein Passwort lautet "${pwd}"`;
+				console.log(pwd_text);
+
+				document.getElementById('show-password-field').innerText = pwd_text;
+			})
       .catch(err => {
+				console.log(err);
         alert('Passwort zurücksetzen fehlgeschlagen');
       });
     }
