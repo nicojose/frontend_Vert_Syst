@@ -46,7 +46,8 @@ register.addEventListener('click', e => {
       //get alle usernames
       //schau ob der username schon vorhanden ist
       // wenn nein alert('Nutzername ist schon vergeben');
-      fetch('http://localhost:3000/comments', {
+			const url = `http://localhost:8080/users`;
+      fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -62,7 +63,7 @@ register.addEventListener('click', e => {
         if(!res.ok){
           throw Error();
         } else {
-          location.href = 'login.html';
+          location.href = 'index.html';
         }
       })
       .catch(err => {

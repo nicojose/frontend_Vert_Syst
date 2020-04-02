@@ -1,5 +1,15 @@
 # frontend_Vert_Syst Requests
-Wichtig! Die Response Jsons müssen genau gleich sein, die Reihenfolge ist nicht so wichtig, aber die Variablen müssen genauso heißen!!! 
+Wichtig! Die Response Jsons müssen genau gleich sein, die Reihenfolge ist nicht so wichtig, aber die Variablen müssen genauso heißen!!!
+
+## Dockerisierung des Frontends
+### Dockerfile
+FROM nginx\
+COPY frontend_Vert_Syst /usr/share/nginx/html
+### Image bauen
+docker build -t website-vert-syst .
+### Container laufen lassen
+docker run --name website -d -p 3000:80 website-vert-syst:latest
+
 
 ## Loginscreen
 
@@ -35,7 +45,7 @@ Needs Response: Type:Json, Body:\
     {
      "user_token": "12345882820872378897238934287hjkadfpnoiuhuibphpifephnoi"
     }
-  
+
  ## Forgot Password
  Method: 'POST'\
  Request:\
@@ -45,7 +55,7 @@ Needs Response: Type:Json, Body:\
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-		username: username,	
+		username: username,
 		email: email
         })
       })
@@ -61,7 +71,7 @@ Needs Response: Type:Json, Body:\
         alert('Passwort zurücksetzen fehlgeschlagen');
       });\
  Needs Response: hauptsache 200 ok
- 
+
 ## Registrieren
 Method: POST\
 Request:\
@@ -87,9 +97,9 @@ fetch('http://localhost:3000/comments', {
       .catch(err => {
         alert('Registrierung fehlgeschlagen');
       });\
-     
+
  Needs Response: hauptsache 200 ok
-    
+
 ## Main-Page
 
 ### Get resources of user -> sending userID Token to Backend
@@ -113,8 +123,8 @@ Request:\
       console.log('response');
       return res.json();
     })\
-    
-Info: Die GET Methode hat keinen Body. Infos werden über den Header mitgegeben. In dem Fall der user token. Wird 2 mal ausgeführt, aber mit anderen Hintergrundoperationen im Frontend. Der Request bleibt jedoch unverändert.\ 
+
+Info: Die GET Methode hat keinen Body. Infos werden über den Header mitgegeben. In dem Fall der user token. Wird 2 mal ausgeführt, aber mit anderen Hintergrundoperationen im Frontend. Der Request bleibt jedoch unverändert.\
 Wants Statuscode: 200 ok\
 Needs Response: Beispiel:\
 [
@@ -228,5 +238,3 @@ Needs Response: yes\
     "inhalt": "eyJvcHMiOlt7ImF0dHJpYnV0ZXMiOnsiYm9sZCI6dHJ1ZX0sImluc2VydCI6ImFzZGZhc2RmIn0seyJhdHRyaWJ1dGVzIjp7InVuZGVybGluZSI6dHJ1ZSwiaXRhbGljIjp0cnVlLCJib2xkIjp0cnVlfSwiaW5zZXJ0IjoiZGRkZGQifSx7Imluc2VydCI6IlxuIn1dfQ=="
 }
 ]
- 
-  

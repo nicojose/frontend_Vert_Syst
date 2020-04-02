@@ -44,7 +44,9 @@ function save(){
 
   if(localStorage.getItem('newItem') == 'true'){
     console.log('post');
-    fetch('http://localhost:3000/comments', {
+
+    const url = `http://localhost:8080/documents`;
+    fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -70,7 +72,12 @@ function save(){
   } else {
     console.log('put');
 
-    fetch('http://localhost:3000/comments', {
+    const params = new URLSearchParams({
+  		element_id: localStorage.getItem('element_id', id)
+  	});
+    const url = `http://localhost:3000/documents?${params.toString()}`;
+
+    fetch(url, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -105,16 +112,19 @@ document.getElementById('delete').addEventListener("click", function(){
 document.getElementById('log-out').addEventListener("click", function(){
   console.log('abmelden');
   localStorage.clear();
-  location.href = "login.html";
+  location.href = "index.html";
 });
 
 async function fillEditor(){
-  await fetch("http://localhost:8080/test123", {
+  const params = new URLSearchParams({
+    element_id: `${localStorage.getItem('element_id')}`
+  });
+  const url = `http://localhost:8080/documents?${params.toString()}`;
+  await fetch(url, {
     method: "GET",
     headers: {
       'Content-Type': 'application/json',
-      'user_token': `${localStorage.getItem('user_token')}`,
-      'element_id': `${localStorage.getItem('element_id')}`
+      'user_token': `${localStorage.getItem('user_token')}`
     }
   })
   .then(res => {

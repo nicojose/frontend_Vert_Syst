@@ -37,12 +37,16 @@ loginForm.addEventListener('submit', function(e){
 	const pwd = document.getElementById('input-password').value;
 	console.log("usr:" + usrName + " pwd: " + pwd);
 
-	fetch('http://localhost:3000/profile', {
+	const params = new URLSearchParams({
+		'username': `${usrName}`,
+		'password': `${pwd}`
+	});
+	const url = `http://localhost:8080/users/login?${params.toString()}`;
+
+	fetch(url, {
 		method: 'GET',
 		headers: {
-			'Content-Type': 'application/json',
-			'username': `${usrName}`,
-			'password': `${pwd}`
+			'Content-Type': 'application/json'
 		}
 	})
 	.then(res => {

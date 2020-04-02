@@ -34,16 +34,15 @@ register.addEventListener('click', e => {
     if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) == false) {
       alert('Email-Adressen müssen dem Format email@domain.etwas entsprechen')
     } else {
-      //im Backend
-      //get alle usernames
-      //schau ob der username schon vorhanden ist
-      // wenn nein alert('Nutzername ist schon vergeben');
-      fetch('http://localhost:8080/test', {
+			const params = new URLSearchParams({
+				username: `${username}`,
+				email: `${email}`
+		  });
+		  const url = `http://localhost:8080/users/password?${params.toString()}`;
+      fetch(url, {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
-					'username': `${username}`,
-					'email': `${email}`
+          'Content-Type': 'application/json'
         }
       })
       .then(res => {

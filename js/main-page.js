@@ -5,7 +5,9 @@ const abmelden = document.getElementById('log-out');
   // gets notiz-einträge Method GET
   async function searchStates(searchText){
     console.log('before fetch get items of user');
-    fetch('http://localhost:3000/posts', {
+
+    const url = `http://localhost:8080/documents`;
+    fetch(url, {
   		method: 'GET',
   		headers: {
   			'Content-Type': 'application/json',
@@ -71,7 +73,8 @@ const abmelden = document.getElementById('log-out');
 
   //printe alle elemente der liste unter searchbar => Method GET
   function initialOutputOfList(){
-    fetch('http://localhost:3000/posts', {
+    const url = `http://localhost:8080/documents`;
+    fetch(url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -111,7 +114,7 @@ const abmelden = document.getElementById('log-out');
   document.getElementById('log-out').addEventListener("click", function(){
     console.log('abmelden');
     localStorage.clear();
-    location.href = "login.html";
+    location.href = "index.html";
   });
 
   function search_element_clicked (id){
@@ -127,12 +130,16 @@ const abmelden = document.getElementById('log-out');
   function delete_element_clicked (id){
     console.log('delete ' + id);
 
-    fetch('http://localhost:3000/posts', {
+    const params = new URLSearchParams({
+      'eintrag_id': `${id}`
+    });
+    const url = `http://localhost:8080/documents?${params.toString()}`;
+
+    fetch(url, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'user_token': `${localStorage.getItem('user_token')}`,
-        'eintrag_id': `${id}`
+        'user_token': `${localStorage.getItem('user_token')}`
       }
     })
     .then(res => {
