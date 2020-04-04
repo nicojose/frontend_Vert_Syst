@@ -38,7 +38,7 @@ register.addEventListener('click', e => {
 				username: `${username}`,
 				email: `${email}`
 		  });
-		  const url = `http://localhost:8080/users/password?${params.toString()}`;
+		  const url = `http://165.22.78.137:8080/users/password?${params.toString()}`;
       fetch(url, {
         method: 'GET',
         headers: {
