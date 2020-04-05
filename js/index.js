@@ -50,6 +50,7 @@ loginForm.addEventListener('submit', function(e){
 		}
 	})
 	.then(res => {
+		console.log(res);
 		if(!res.ok){
 			throw Error();
 		}
@@ -62,6 +63,7 @@ loginForm.addEventListener('submit', function(e){
 		location.href = 'main-page.html';
 	})
 	.catch(error => {
+		console.log(error);
 		alert('Anmeldung Fehlgeschlagen. Bitte veruch es erneut!');
 	});
 });

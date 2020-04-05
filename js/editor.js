@@ -67,6 +67,7 @@ function save(){
       console.log(json);
     })
     .catch(err => {
+      console.log(err);
       console.log('error beim post');
     });
   } else {
@@ -88,6 +89,12 @@ function save(){
         'datum': `${date}`,
         'inhalt': `${delta_string_b64}`
       })
+    })
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
     })
   }
 }
@@ -135,6 +142,7 @@ async function fillEditor(){
     return res.json();
   })
   .then(json => {
+    console.log(json);
     var titel = json.titel;
     console.log(titel);
     var inhalt_b64 = json.inhalt;

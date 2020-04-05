@@ -67,6 +67,7 @@ register.addEventListener('click', e => {
         }
       })
       .catch(err => {
+				console.log(err);
         alert('Registrierung fehlgeschlagen');
       });
     }

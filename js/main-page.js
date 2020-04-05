@@ -26,7 +26,7 @@ const abmelden = document.getElementById('log-out');
       return res.json();
     })
     .then(json => {
-      console.log('json');
+      console.log(json);
       const list = json;
 
       //filter die liste der einträgen nach input
@@ -48,6 +48,7 @@ const abmelden = document.getElementById('log-out');
       }
 
     }).catch(error => {
+      console.log(error);
       console.log(error);
       //alert('Fehler beim Laden der Einträge. Bitte versuche es später erneut!');
     });
@@ -97,7 +98,7 @@ const abmelden = document.getElementById('log-out');
       outputMatches2HTML(list);
     }).catch(error => {
       console.log(error);
-      //alert('Fehler beim Laden der Einträge. Bitte versuche es später erneut!');
+      alert('Fehler beim Laden der Einträge. Bitte versuche es später erneut!');
     });
   }
 
@@ -150,6 +151,7 @@ const abmelden = document.getElementById('log-out');
       searchStates(search.value); //list aktualisieren
     })
     .catch(err => {
+      console.log(err);
       alert('Löschen fehlgeschlagen');
     })
   }
