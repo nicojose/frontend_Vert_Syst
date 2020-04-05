@@ -41,7 +41,7 @@ loginForm.addEventListener('submit', function(e){
 		'username': `${usrName}`,
 		'password': `${pwd}`
 	});
-	const url = `http://localhost:8080/users/login?${params.toString()}`;
+	const url = `http://165.22.78.137:8080/users/login?${params.toString()}`;
 
 	fetch(url, {
 		method: 'GET',

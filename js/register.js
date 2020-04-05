@@ -46,7 +46,7 @@ register.addEventListener('click', e => {
       //get alle usernames
       //schau ob der username schon vorhanden ist
       // wenn nein alert('Nutzername ist schon vergeben');
-			const url = `http://localhost:8080/users`;
+			const url = `http://165.22.78.137:8080/users`;
       fetch(url, {
         method: 'POST',
         headers: {

@@ -6,7 +6,7 @@ const abmelden = document.getElementById('log-out');
   async function searchStates(searchText){
     console.log('before fetch get items of user');
 
-    const url = `http://localhost:8080/documents`;
+    const url = `http://165.22.78.137:8080/documents`;
     fetch(url, {
   		method: 'GET',
   		headers: {
@@ -74,7 +74,7 @@ const abmelden = document.getElementById('log-out');
 
   //printe alle elemente der liste unter searchbar => Method GET
   function initialOutputOfList(){
-    const url = `http://localhost:8080/documents`;
+    const url = `http://165.22.78.137:8080/documents`;
     fetch(url, {
       method: 'GET',
       headers: {
@@ -134,7 +134,7 @@ const abmelden = document.getElementById('log-out');
     const params = new URLSearchParams({
       'eintrag_id': `${id}`
     });
-    const url = `http://localhost:8080/documents?${params.toString()}`;
+    const url = `http://165.22.78.137:8080/documents?${params.toString()}`;
 
     fetch(url, {
       method: 'DELETE',

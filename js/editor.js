@@ -45,7 +45,7 @@ function save(){
   if(localStorage.getItem('newItem') == 'true'){
     console.log('post');
 
-    const url = `http://localhost:8080/documents`;
+    const url = `http://165.22.78.137:8080/documents`;
     fetch(url, {
       method: 'POST',
       headers: {
@@ -76,7 +76,7 @@ function save(){
     const params = new URLSearchParams({
   		element_id: localStorage.getItem('element_id', id)
   	});
-    const url = `http://localhost:3000/documents?${params.toString()}`;
+    const url = `http://165.22.78.137:8080/documents?${params.toString()}`;
 
     fetch(url, {
       method: 'PUT',
@@ -126,7 +126,7 @@ async function fillEditor(){
   const params = new URLSearchParams({
     element_id: `${localStorage.getItem('element_id')}`
   });
-  const url = `http://localhost:8080/documents?${params.toString()}`;
+  const url = `http://165.22.78.137:8080/documents?${params.toString()}`;
   await fetch(url, {
     method: "GET",
     headers: {
