@@ -63,11 +63,13 @@ function save(){
       if(!res.ok){
         throw Error();
       }
+      return res.json();
     }).then(json => {
       console.log(json);
       console.log(json.element_id);
       localStorage.setItem('element_id', element_id);
       localStorage.setItem('newItem', 'false');
+      console.log(localStorage.getItem('newItem'));
     })
     .catch(err => {
       console.log(err);
