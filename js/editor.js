@@ -33,7 +33,7 @@ function save(){
   console.log('titel: ' + title);
 
   var date_obj = new Date();
-  const date = date_obj.getDate() + "." + date_obj.getMonth() + "." + date_obj.getFullYear();
+  const date = date_obj.getDate() + "." + (date_obj.getMonth() + 1) + "." + date_obj.getFullYear();
   console.log('datum: ' + date);
 
   const delta = quill.getContents();
@@ -65,6 +65,9 @@ function save(){
       }
     }).then(json => {
       console.log(json);
+      console.log(json.element_id);
+      localStorage.setItem('element_id', element_id);
+      localStorage.setItem('newItem', 'false');
     })
     .catch(err => {
       console.log(err);
@@ -74,7 +77,7 @@ function save(){
     console.log('put');
 
     const params = new URLSearchParams({
-  		element_id: localStorage.getItem('element_id', id)
+  		element_id: localStorage.getItem('element_id')
   	});
     const url = `http://165.22.78.137:8080/documents?${params.toString()}`;
 
