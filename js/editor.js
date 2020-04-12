@@ -39,8 +39,7 @@ function save(){
   const delta = quill.getContents();
   const delta_string = JSON.stringify(delta);
   console.log(delta_string);
-  const delta_string_b64 = btoa(delta_string); //convert uniconde to base64
-  console.log('body: ' + delta_string_b64);
+  console.log('body: ' + delta_string);
 
   if(localStorage.getItem('newItem') == 'true'){
     console.log('post');
@@ -55,7 +54,7 @@ function save(){
       body: JSON.stringify({
         'titel': `${title}`,
         'datum': `${date}`,
-        'inhalt': `${delta_string_b64}`
+        'inhalt': `${delta_string}`
       })
     })
     .then(res => {
@@ -92,7 +91,7 @@ function save(){
       body: JSON.stringify({
         'titel': `${title}`,
         'datum': `${date}`,
-        'inhalt': `${delta_string_b64}`
+        'inhalt': `${delta_string}`
       })
     })
     .then(res => {
@@ -150,18 +149,17 @@ async function fillEditor(){
     console.log(json);
     var titel = json.titel;
     console.log(titel);
-    var inhalt_b64 = json.inhalt;
-    console.log(inhalt_b64);
+    var inhalt = json.inhalt;
+    console.log(inhalt);
 
-    console.log('inhalt: ' + inhalt_b64);
-    var delta_string_unicode = atob(inhalt_b64); //convert uniconde to base64
-    console.log(delta_string_unicode);
-    delta_string_unicode = delta_string_unicode + '\n'; //add linebreak
-    console.log(delta_string_unicode);
+    console.log('inhalt: ' + inhalt);
+    console.log(inhalt);
+    inhalt = inhalt + '\n'; //add linebreak
+    console.log(inhalt);
 
     //set Title and content
     document.getElementById('title').value = titel;
-    quill.setContents(JSON.parse(delta_string_unicode));
+    quill.setContents(JSON.parse(inhalt));
   })
   .catch(err => {
     console.log(err);
