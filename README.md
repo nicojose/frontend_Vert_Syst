@@ -160,8 +160,11 @@ Request:
     })
 ```
 Wants Statuscode: 200 ok\
-Needs Response: no\
+Needs Response: yes\
 [
+	{
+	element_id: 32
+	}
 ]
 
 ### Vorhandenen Eintrag speichern
