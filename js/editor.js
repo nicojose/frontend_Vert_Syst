@@ -67,7 +67,7 @@ function save(){
     }).then(json => {
       console.log(json);
       console.log(json.element_id);
-      localStorage.setItem('element_id', element_id);
+      localStorage.setItem('element_id', json.element_id);
       localStorage.setItem('newItem', 'false');
       console.log(localStorage.getItem('newItem'));
     })
