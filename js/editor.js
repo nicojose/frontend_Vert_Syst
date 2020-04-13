@@ -159,7 +159,7 @@ async function fillEditor(){
 
     //set Title and content
     document.getElementById('title').value = titel;
-    quill.setContents(JSON.parse(inhalt));
+    quill.setContents(JSON.parse(JSON.stringify(inhalt)));
   })
   .catch(err => {
     console.log(err);
