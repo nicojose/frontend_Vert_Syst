@@ -154,8 +154,8 @@ async function fillEditor(){
 
     console.log('inhalt: ' + inhalt);
     console.log(inhalt);
-    inhalt = inhalt + '\n'; //add linebreak
-    console.log(inhalt);
+    //inhalt = inhalt + '\n'; //add linebreak
+    //console.log(inhalt);
 
     //set Title and content
     document.getElementById('title').value = titel;
