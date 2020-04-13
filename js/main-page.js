@@ -62,7 +62,7 @@ const abmelden = document.getElementById('log-out');
               <h4 class="title">${match.titel}</h4>
               <h7>${match.datum}</h7>
             </div>
-            <button type="button" class="col btn delete" id="${match.id}" onClick="delete_element_clicked(this.id)"><i class="far fa-trash-alt fa-lg delete-icon"></i></button>
+            <button type="button" class="col border-left rounded-0 btn delete" id="${match.id}" onClick="delete_element_clicked(this.id)"><i class="far fa-trash-alt fa-lg delete-icon"></i></button>
 
           </div>
         `
