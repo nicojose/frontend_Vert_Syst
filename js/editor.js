@@ -117,31 +117,36 @@ document.getElementById('save').addEventListener("click", function(){
 });
 
 document.getElementById('delete').addEventListener("click", function(){
-  console.log('delete');
+  if(localStorage.getItem("newItem") == "false"){
+    console.log('delete');
 
-  const params = new URLSearchParams({
-    'eintrag_id': `${localStorage.getItem(element_id)}`
-  });
-  const url = `http://165.22.78.137:8080/documents?${params.toString()}`;
+    const params = new URLSearchParams({
+      'eintrag_id': `${localStorage.getItem("element_id")}`
+    });
+    const url = `http://165.22.78.137:8080/documents?${params.toString()}`;
 
-  fetch(url, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-      'user_token': `${localStorage.getItem('user_token')}`
-    }
-  })
-  .then(res => {
-    console.log(res);
-    if(!res.ok){
-      throw Error();
-    }
+    fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'user_token': `${localStorage.getItem('user_token')}`
+      }
+    })
+    .then(res => {
+      console.log(res);
+      if(!res.ok){
+        throw Error();
+      }
+      location.href = "main-page.html";
+    })
+    .catch(err => {
+      console.log(err);
+      alert('Löschen fehlgeschlagen');
+    });
+  } else {
+    //jump directly to main page if nothing was saved into database
     location.href = "main-page.html";
-  })
-  .catch(err => {
-    console.log(err);
-    alert('Löschen fehlgeschlagen');
-  })
+  }
 });
 
 document.getElementById('log-out').addEventListener("click", function(){
