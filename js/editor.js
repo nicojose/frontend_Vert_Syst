@@ -9,7 +9,7 @@ var toolbarOptions = [
   [{'indent' : '-1'}, {'indent' : '+1'}],
   [{'direction' : 'rtl'}],
   [{'size' : ['small', false, 'large', 'huge'] }],
-  ['link', 'image', 'video', 'formula'],
+  ['link', 'formula'],
   [{'color' : [] }, {'background': [] }],
   [{ 'font' : [] }],
   [{'align' : [] }]
@@ -39,7 +39,7 @@ function save(){
   const delta = quill.getContents();
   const delta_string = JSON.stringify(delta);
   console.log(delta_string);
-  console.log('body: ' + delta_string);
+  console.log('inhalt: ' + delta_string);
 
   if(localStorage.getItem('newItem') == 'true'){
     console.log('post');
@@ -104,11 +104,11 @@ function save(){
 }
 
 document.getElementById('logo').addEventListener("click", function(){
-  save();
-  setTimeout(function(){
-    location.href = "main-page.html";
-  }, 2000);
-
+  const isToSave = confirm('Sollen die Änderungen gespeichert werden?');
+  if(isToSave){
+    save();
+  }
+  location.href = "main-page.html";
 });
 
 document.getElementById('save').addEventListener("click", function(){
@@ -130,7 +130,7 @@ async function fillEditor(){
   const params = new URLSearchParams({
     element_id: `${localStorage.getItem('element_id')}`
   });
-  const url = `http://165.22.78.137:8080/documents?${params.toString()}`;
+  const url = `http://165.22.78.137:8080/document?${params.toString()}`;
   await fetch(url, {
     method: "GET",
     headers: {
@@ -149,17 +149,22 @@ async function fillEditor(){
     console.log(json);
     var titel = json.titel;
     console.log(titel);
+    document.getElementById('title').value = titel;
+
     var inhalt = json.inhalt;
     console.log(inhalt);
+    console.log('inhalt tostring: ' + inhalt.toString());
+    //die linebreaks des Strings werden durch JavaScript verständliche Linebreaks ersetzt
+    var string_inhalt = inhalt.replace(/(\r\n|\n|\r)/gm,"\\n");
 
-    console.log('inhalt: ' + inhalt);
-    console.log(inhalt);
-    //inhalt = inhalt + '\n'; //add linebreak
-    //console.log(inhalt);
+    console.log(string_inhalt);
 
-    //set Title and content
-    document.getElementById('title').value = titel;
-    quill.setContents(JSON.parse(JSON.stringify(inhalt)));
+    var inhalt_json = JSON.parse(string_inhalt);
+    console.log(inhalt_json);
+    var ops = inhalt_json.ops;
+    console.log(ops);
+    //Setzten des Inhalts in den Texteditor
+    quill.setContents(ops, 'api');
   })
   .catch(err => {
     console.log(err);
