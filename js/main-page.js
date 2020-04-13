@@ -123,7 +123,6 @@ const abmelden = document.getElementById('log-out');
     localStorage.setItem('element_id', id);
     localStorage.setItem('newItem', 'false');
 
-    localStorage.setItem('notiz_id', id);
     location.href = 'editor.html';
   }
 
