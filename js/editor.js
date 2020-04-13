@@ -69,6 +69,8 @@ function save(){
       localStorage.setItem('element_id', json.element_id);
       localStorage.setItem('newItem', 'false');
       console.log(localStorage.getItem('newItem'));
+
+      alert("Dokument gespeichert");
     })
     .catch(err => {
       console.log(err);
@@ -96,6 +98,7 @@ function save(){
     })
     .then(res => {
       console.log(res);
+      alert("Dokument gespeichert");
     })
     .catch(err => {
       console.log(err);
