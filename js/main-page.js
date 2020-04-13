@@ -1,11 +1,12 @@
+//load DOM data
 const search = document.getElementById('searchbar');
 const matchlist = document.getElementById('match-list');
 const abmelden = document.getElementById('log-out');
 
-  // gets notiz-einträge Method GET
+  // gets elements
   async function searchStates(searchText){
     console.log('before fetch get items of user');
-
+    //request
     const url = `http://165.22.78.137:8080/documents`;
     fetch(url, {
   		method: 'GET',
@@ -29,7 +30,7 @@ const abmelden = document.getElementById('log-out');
       console.log(json);
       const list = json;
 
-      //filter die liste der einträgen nach input
+      //filters the list of documents for input
       let matches = list.filter(item => {
         const regex = new RegExp(`^${searchText}`, 'gi');
         return item.titel.match(regex) || item.datum.match(regex);
@@ -49,11 +50,11 @@ const abmelden = document.getElementById('log-out');
 
     }).catch(error => {
       console.log(error);
-      console.log(error);
-      //alert('Fehler beim Laden der Einträge. Bitte versuche es später erneut!');
+      alert('Fehler beim Laden der Einträge. Bitte versuche es später erneut!');
     });
   }
 
+  //create list of matches dynamically
   function outputMatches2HTML(matches){
     if(matches.length > 0){
       const html = matches.map(match => `
@@ -72,8 +73,9 @@ const abmelden = document.getElementById('log-out');
     }
   }
 
-  //printe alle elemente der liste unter searchbar => Method GET
+  //print all list documents under searchbar
   function initialOutputOfList(){
+    //request
     const url = `http://165.22.78.137:8080/documents`;
     fetch(url, {
       method: 'GET',
@@ -102,22 +104,23 @@ const abmelden = document.getElementById('log-out');
     });
   }
 
-  //scripting
+  //output the list after load
   initialOutputOfList();
   search.addEventListener('input', () => searchStates(search.value));
 
-
-
+  //go to editor -> new element
   document.getElementById('add').addEventListener("click", function(){
     location.href = 'editor.html';
   });
 
+  //log out of document
   document.getElementById('log-out').addEventListener("click", function(){
     console.log('abmelden');
     localStorage.clear();
     location.href = "index.html";
   });
 
+  //go to editor -> existing document
   function search_element_clicked (id){
     console.log('element ' + id);
     localStorage.setItem('element_id', id);
@@ -126,10 +129,11 @@ const abmelden = document.getElementById('log-out');
     location.href = 'editor.html';
   }
 
-  //delete notiz-element Method: DELETE
+  //delete document
   function delete_element_clicked (id){
     console.log('delete ' + id);
 
+    //request
     const params = new URLSearchParams({
       'eintrag_id': `${id}`
     });
@@ -147,7 +151,7 @@ const abmelden = document.getElementById('log-out');
       if(!res.ok){
         throw Error();
       }
-      searchStates(search.value); //list aktualisieren
+      searchStates(search.value); //update list
     })
     .catch(err => {
       console.log(err);
@@ -155,6 +159,7 @@ const abmelden = document.getElementById('log-out');
     })
   }
 
+  //activated first when window loads
   window.onload = function() {
     console.log('page loaded');
     localStorage.setItem('newItem', 'true');

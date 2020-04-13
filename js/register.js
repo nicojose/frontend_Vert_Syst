@@ -1,3 +1,4 @@
+//load DOM elements
 const inputs = document.querySelectorAll(".input");
 const loginForm = document.getElementById("login-form");
 const register = document.getElementById("register");
@@ -7,24 +8,26 @@ inputs.forEach(input => {
 	input.addEventListener("blur", removeColor);
 });
 
-
+//add color to elements
 function addColor(){
 	let parent = this.parentNode.parentNode;
 	parent.classList.add("focus");
 }
 
+//remove color from elements
 function removeColor(){
-
 	let parent = this.parentNode.parentNode;
 	if(this.value == ""){
 		parent.classList.remove("focus");
 	}
 }
 
+//eventlistener on register button
 register.addEventListener('click', e => {
 	e.preventDefault();
   console.log("submit");
 
+	//set data
   const username = document.getElementById('input-username').value;
   const pwd1 = document.getElementById('input-password').value;
   const pwd2 = document.getElementById('input-password-wdh').value;
@@ -33,6 +36,7 @@ register.addEventListener('click', e => {
 	console.log(email);
 	console.log((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)));
 
+		//password checking
     if(pwd1 == ""){
       alert('Passwort darf nicht lehr sein!');
     } else if (pwd1 != pwd2) {
@@ -42,10 +46,8 @@ register.addEventListener('click', e => {
     } else if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) == false) {
       alert('Email-Adressen müssen dem Format email@domain.etwas entsprechen')
     } else {
-      //im Backend
-      //get alle usernames
-      //schau ob der username schon vorhanden ist
-      // wenn nein alert('Nutzername ist schon vergeben');
+
+			//request
 			const url = `http://165.22.78.137:8080/users`;
       fetch(url, {
         method: 'POST',

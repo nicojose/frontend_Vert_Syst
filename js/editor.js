@@ -1,5 +1,5 @@
-
-// check out documentation of quill: https://quilljs.com/docs/api/#setcontents
+//set the toolbar
+//check out documentation of quill: https://quilljs.com/docs/api/#setcontents
 var toolbarOptions = [
   ['bold', 'italic', 'underline', 'strike'],
   ['blockquote', 'code-block'],
@@ -15,6 +15,7 @@ var toolbarOptions = [
   [{'align' : [] }]
 ]
 
+//set Qull editor
 var quill = new Quill('#editor', {
   modules: {
     toolbar: toolbarOptions
@@ -32,6 +33,7 @@ function save(){
   }
   console.log('titel: ' + title);
 
+  //create Date
   var date_obj = new Date();
   const date = date_obj.getDate() + "." + (date_obj.getMonth() + 1) + "." + date_obj.getFullYear();
   console.log('datum: ' + date);
@@ -44,6 +46,7 @@ function save(){
   if(localStorage.getItem('newItem') == 'true'){
     console.log('post');
 
+    //request
     const url = `http://165.22.78.137:8080/documents`;
     fetch(url, {
       method: 'POST',
@@ -79,6 +82,7 @@ function save(){
   } else {
     console.log('put');
 
+    //request
     const params = new URLSearchParams({
   		element_id: localStorage.getItem('element_id')
   	});
@@ -106,6 +110,7 @@ function save(){
   }
 }
 
+//when clicked on logo icon in top left corner
 document.getElementById('logo').addEventListener("click", function(){
   const isToSave = confirm('Sollen die Änderungen gespeichert werden?');
   if(isToSave){
@@ -114,15 +119,18 @@ document.getElementById('logo').addEventListener("click", function(){
   location.href = "main-page.html";
 });
 
+//when clicked on save icon
 document.getElementById('save').addEventListener("click", function(){
   save();
   localStorage.setItem('newItem', 'false');
 });
 
+//when clicked on delete icon
 document.getElementById('delete').addEventListener("click", function(){
   if(localStorage.getItem("newItem") == "false"){
     console.log('delete');
 
+    //request
     const params = new URLSearchParams({
       'eintrag_id': `${localStorage.getItem("element_id")}`
     });
@@ -152,13 +160,16 @@ document.getElementById('delete').addEventListener("click", function(){
   }
 });
 
+//log out
 document.getElementById('log-out').addEventListener("click", function(){
   console.log('abmelden');
   localStorage.clear();
   location.href = "index.html";
 });
 
+//fill the editor with data
 async function fillEditor(){
+  //request
   const params = new URLSearchParams({
     element_id: `${localStorage.getItem('element_id')}`
   });
@@ -186,16 +197,17 @@ async function fillEditor(){
     var inhalt = json.inhalt;
     console.log(inhalt);
     console.log('inhalt tostring: ' + inhalt.toString());
-    //die linebreaks des Strings werden durch JavaScript verständliche Linebreaks ersetzt
+    //the linebreaks of the String (\n) are replaced with JavaScript usable linebreak (\\n)
     var string_inhalt = inhalt.replace(/(\r\n|\n|\r)/gm,"\\n");
 
     console.log(string_inhalt);
 
+    //create json object
     var inhalt_json = JSON.parse(string_inhalt);
     console.log(inhalt_json);
     var ops = inhalt_json.ops;
     console.log(ops);
-    //Setzten des Inhalts in den Texteditor
+    //set content of texteditor
     quill.setContents(ops, 'api');
   })
   .catch(err => {
@@ -204,6 +216,7 @@ async function fillEditor(){
   });
 }
 
+  //activated first when window loads
 window.onload = function() {
   console.log('page loaded');
 

@@ -1,3 +1,4 @@
+//load DOM data
 const inputs = document.querySelectorAll(".input");
 const loginForm = document.getElementById("login-form");
 
@@ -6,7 +7,7 @@ inputs.forEach(input => {
 	input.addEventListener("blur", removeColor);
 });
 
-
+//add color to elements
 function addColor(){
 	console.log("this");
 	console.log(this);
@@ -21,6 +22,7 @@ function addColor(){
 	parent.classList.add("focus");
 }
 
+//remove color from elements
 function removeColor(){
 
 	let parent = this.parentNode.parentNode;
@@ -29,14 +31,15 @@ function removeColor(){
 	}
 }
 
-//login Method: Post
 loginForm.addEventListener('submit', function(e){
 	e.preventDefault();
 
+	//load data
 	const usrName = document.getElementById('input-username').value;
 	const pwd = document.getElementById('input-password').value;
 	console.log("usr:" + usrName + " pwd: " + pwd);
 
+	//request
 	const params = new URLSearchParams({
 		'username': `${usrName}`,
 		'password': `${pwd}`
@@ -68,9 +71,8 @@ loginForm.addEventListener('submit', function(e){
 	});
 });
 
+//activated first when window loads
 window.addEventListener("load", function(event) {
 	 console.log("Alle Ressourcen haben das Laden beendet!");
 	 localStorage.clear();
-	 //TODO delete after testing
-	 //localStorage.setItem('user_token', 'jsdafklfdsaiöhjk8u89p7fsdakhjöeru8ühjkfds');
  });
