@@ -9,7 +9,7 @@ var toolbarOptions = [
   [{'indent' : '-1'}, {'indent' : '+1'}],
   [{'direction' : 'rtl'}],
   [{'size' : ['small', false, 'large', 'huge'] }],
-  ['link', 'formula'],
+  ['link', 'image', 'video','formula'],
   [{'color' : [] }, {'background': [] }],
   [{ 'font' : [] }],
   [{'align' : [] }]
